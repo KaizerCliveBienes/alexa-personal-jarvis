@@ -1,0 +1,28 @@
+{
+	"version": "1.0",
+	"request": {
+		"type": "IntentRequest",
+		"requestId": "amzn1.echo-api.request.79c3b8b9-69c1-4aab-b8e0-e17b5ef82d3d",
+		"locale": "en-US",
+		"timestamp": "2025-02-23T17:20:55Z",
+		"intent": {
+			"name": "FlightFinderIntent",
+			"confirmationStatus": "NONE",
+      "slots": {
+        "origin": {
+          "value": "Berlin"
+        },
+        "destination": {
+          "value": "New York"
+        },
+        "departureDate": {
+          "value": "first week of October"
+        },
+        "returnDate": {
+          "value": "last week of October"
+        }
+      }
+		},
+		"dialogState": "STARTED"
+	}
+}

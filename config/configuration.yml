@@ -1,0 +1,15 @@
+chatgpt:
+  model: 'gpt-4.1-mini'
+
+alexa:
+  version: '1.0'
+  outputSpeechType: 'PlainText'
+  text:
+    errorText: 'Jarvis responded: Something went wrong while processing your request.'
+  event:
+    intentRequest: 'IntentRequest'
+    readNewsIntent: 'ReadNewsIntent'
+    stopIntent: 'AMAZON.StopIntent'
+    chatIntent: 'ChatGPTIntent'
+    transpoPathIntent: 'TranspoPathIntent'
+    flightFinderIntent: 'FlightFinderIntent'

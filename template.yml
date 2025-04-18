@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  AlexaChatGPTHandlerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: AlexaChatGPTHandlerFunction
+      Handler: index.handler  # Points to index.js handler function
+      Runtime: nodejs18.x
+      CodeUri: .  # Folder containing index.js
+      MemorySize: 128
+      Timeout: 15
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Environment:
+        Variables:
+          CHATGPT_API_KEY: ""
+          GOOGLE_MAPS_API_KEY: ""
+          SERP_API_KEY: ""
+
+
+Outputs:
+  AlexaChatGPTHandler:
+    Description: "Lambda alexa chatgpt handler name"
+    Value: !Ref AlexaChatGPTHandlerFunction
+

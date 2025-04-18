@@ -1,0 +1,18 @@
+{
+  "name": "Alexa - Jarvis Integration",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "A project to integrate Alexa with Jarvis using OpenAI and SerpAPI.",
+  "type": "module",
+  "dependencies": {
+    "csv-parser": "^3.2.0",
+    "fast-xml-parser": "^5.0.6",
+    "fetch": "^1.1.0",
+    "haversine-distance": "^1.2.3",
+    "js-yaml": "^4.1.0",
+    "luxon": "^3.5.0",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.82.0",
+    "serpapi": "^2.1.0"
+  }
+}
