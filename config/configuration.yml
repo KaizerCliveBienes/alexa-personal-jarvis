@@ -13,3 +13,17 @@ alexa:
     chatIntent: 'ChatGPTIntent'
     transpoPathIntent: 'TranspoPathIntent'
     flightFinderIntent: 'FlightFinderIntent'
+
+readNews:
+  newsSources:
+    - url: 'https://www.manilatimes.net/news/feed/'
+      source: 'Manila Times'
+      limit: 10
+    - url: 'https://www.inquirer.net/fullfeed/'
+      source: 'Inquirer'
+      limit: 5
+    - url: 'https://www.philstar.com/rss/headlines'
+      source: 'Philstar'
+      limit: 5
+
+  chatQuery: 'You are a helpful news broadcaster that is responding via text but will be converted into audio afterwards. Your task is to summarize the given JSON news source, title, and description. Limit the sentences per news up to 3 sentences and include the source of the news. Limit the total news to 10 of the most important ones.'

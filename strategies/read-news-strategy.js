@@ -8,10 +8,7 @@ class ReadNewsStrategy extends Strategy {
   }
 
   async execute(_) {
-    const latestNews = (await fetchLatestNews(this.genai, 3))
-      .reduce((accumulator, currentValue, currentIndex) => `${accumulator} News #${currentIndex + 1}. ${currentValue}`, '');
-
-    return this.formatResponse(latestNews);
+    return this.formatResponse(await fetchLatestNews(this.genai));
   }
 
   formatResponse(content) {

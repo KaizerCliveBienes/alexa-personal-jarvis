@@ -62,6 +62,7 @@ export const handler = async (event, _) => {
             destination: event.request.intent.slots.destination.value,
             departureDate: event.request.intent.slots.departureDate.value,
             returnDate: event.request.intent.slots.returnDate.value,
+            test: (event.request.intent.slots.test.value ?? "false" === "true"),
           };
 
           context.setStrategy(new FlightFinderStrategy(serpApiKey, genai));

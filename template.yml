@@ -10,7 +10,7 @@ Resources:
       Runtime: nodejs18.x
       CodeUri: .  # Folder containing index.js
       MemorySize: 128
-      Timeout: 15
+      Timeout: 30
       Policies:
         - AWSLambdaBasicExecutionRole
       Environment:

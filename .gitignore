@@ -138,3 +138,6 @@ dist
 
 # aws
 .aws-sam/
+
+# lambda_function
+lambda_function.zip

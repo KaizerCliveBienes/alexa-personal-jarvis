@@ -20,6 +20,9 @@
         },
         "returnDate": {
           "value": "last week of October"
+        },
+        "test": {
+          "value": "true"
         }
       }
 		},
