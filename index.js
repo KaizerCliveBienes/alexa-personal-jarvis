@@ -8,6 +8,8 @@ import TranspoPathStrategy from './strategies/transpo-path-strategy.js';
 import FlightFinderStrategy from './strategies/flight-finder-strategy.js';
 import ChatGPT from './genai/chatgpt.js';
 import config from './config/config.js';
+import AWS from 'aws-sdk';
+import StoreAudioFileTemp from './services/store-audio-file-temp.js';
 
 const genai = new ChatGPT(
   new OpenAI({
@@ -20,9 +22,19 @@ const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
 
 const serpApiKey = process.env.SERP_API_KEY;
 
+const s3Client = new AWS.S3({
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3_ACCESS_KEY_SECRET,
+  region: process.env.S3_REGION
+});
+
+const s3BucketName = process.env.S3_BUCKET_NAME;
+
 export const handler = async (event, _) => {
   const context = new Context();
   let parameters = {};
+
+  const storeAudioFileTemp = new StoreAudioFileTemp(s3Client, s3BucketName);
 
   try {
     if (event.request.type !== config.alexa.event.intentRequest) {
@@ -30,7 +42,7 @@ export const handler = async (event, _) => {
     } else {
       switch (event.request.intent.name) {
         case config.alexa.event.readNewsIntent:
-          context.setStrategy(new ReadNewsStrategy(genai));
+          context.setStrategy(new ReadNewsStrategy(genai, storeAudioFileTemp));
           break;
         case config.alexa.event.stopIntent:
           context.setStrategy(new StopStrategy());
@@ -41,7 +53,12 @@ export const handler = async (event, _) => {
             userQuery: event.request.intent.slots.query.value,
           };
 
-          context.setStrategy(new ChatStrategy(genai));
+          context.setStrategy(
+            new ChatStrategy(
+              genai,
+              storeAudioFileTemp,
+            )
+          );
           break;
         case config.alexa.event.transpoPathIntent:
           parameters = {
@@ -55,7 +72,7 @@ export const handler = async (event, _) => {
           context.setStrategy(new TranspoPathStrategy(googleMapsApiKey));
           break;
         case config.alexa.event.flightFinderIntent:
-          console.info(JSON.stringify(event.request.intent.slots,null,2));
+          console.info(JSON.stringify(event.request.intent.slots, null, 2));
           parameters = {
             ...parameters,
             origin: event.request.intent.slots.origin.value,
@@ -66,6 +83,7 @@ export const handler = async (event, _) => {
           };
 
           context.setStrategy(new FlightFinderStrategy(serpApiKey, genai));
+          console.log("intenthereafter: " + event.request.intent.name);
           break;
         default:
           context.setStrategy(new FallbackStrategy());

@@ -125,6 +125,7 @@ describe('Handler Tests', () => {
             destination: { value: 'City B' },
             departureDate: { value: '2025-05-20' },
             returnDate: { value: '2025-05-25' },
+            test: { value: "true" },
           },
         },
       },
