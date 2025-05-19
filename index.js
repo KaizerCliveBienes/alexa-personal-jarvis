@@ -42,6 +42,11 @@ export const handler = async (event, _) => {
     } else {
       switch (event.request.intent.name) {
         case config.alexa.event.readNewsIntent:
+          parameters = {
+            ...parameters,
+            test: (event.request?.intent?.slots?.test?.value ?? "false" === "true"),
+          }
+
           context.setStrategy(new ReadNewsStrategy(genai, storeAudioFileTemp));
           break;
         case config.alexa.event.stopIntent:
@@ -79,11 +84,10 @@ export const handler = async (event, _) => {
             destination: event.request.intent.slots.destination.value,
             departureDate: event.request.intent.slots.departureDate.value,
             returnDate: event.request.intent.slots.returnDate.value,
-            test: (event.request.intent.slots.test.value ?? "false" === "true"),
+            test: (event.request.intent.slots?.test?.value ?? "false" === "true"),
           };
 
           context.setStrategy(new FlightFinderStrategy(serpApiKey, genai));
-          console.log("intenthereafter: " + event.request.intent.name);
           break;
         default:
           context.setStrategy(new FallbackStrategy());

@@ -7,7 +7,6 @@ class StoreAudioFileTemp {
 
   async uploadAndGetTemporaryUrl(mp3Buffer) {
     const s3Key = `temp-audio-${Date.now()}.mp3`;
-    console.log("BUCKET NAME IS: ", this.bucketName);
     try {
       const uploadParams = {
         Bucket: this.bucketName,
@@ -17,7 +16,7 @@ class StoreAudioFileTemp {
       };
 
       const uploadResult = await this.s3Client.upload(uploadParams).promise();
-      console.log('File uploaded successfully:', uploadResult.Location);
+      console.info('File uploaded successfully:', uploadResult.Location);
 
       const signedUrlParams = {
         Bucket: this.bucketName,
@@ -26,7 +25,7 @@ class StoreAudioFileTemp {
       };
 
       const temporaryUrl = this.s3Client.getSignedUrl('getObject', signedUrlParams);
-      console.log('Temporary S3 URL:', temporaryUrl);
+      console.info('Temporary S3 URL:', temporaryUrl);
 
       return { url: temporaryUrl, key: s3Key };
     } catch (error) {

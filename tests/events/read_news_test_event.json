@@ -8,6 +8,11 @@
 		"intent": {
 			"name": "ReadNewsIntent",
 			"confirmationStatus": "NONE"
+      "slots": {
+        "test": {
+          "value": "true"
+        }
+      }
 		},
 		"dialogState": "STARTED"
 	}

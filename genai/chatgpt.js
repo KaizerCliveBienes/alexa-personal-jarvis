@@ -20,11 +20,10 @@ class ChatGPT extends GenAI {
 
   async textToSpeech(textToSpeech) {
     const mp3 = await this.openai.audio.speech.create({
-      model: "tts-1",
+      model: "gpt-4o-mini-tts",
       voice: "echo",
       instructions: "Speak in the style of a professional news reporter. Maintain a clear, steady pace with deliberate phrasing. Use neutral intonation with slight emphasis on key facts and transitions. Your tone should be informative and confident, avoiding dramatization. Pause briefly after commas and periods to allow for clarity. Treat punctuation naturally: rise slightly at commas, and pause at periods and dashes. Avoid overly casual language; use formal or semi-formal phrasing appropriate for a news broadcast.",
       input: textToSpeech,
-      speed: 1.15,
     });
 
     return await mp3.arrayBuffer();

@@ -1,12 +1,5 @@
 import Strategy from './strategy.js';
-import { getJson } from 'serpapi';
-import fetch from 'node-fetch';
-import { DateTime } from 'luxon';
-import fs from 'fs';
 import { getFlightOffers, formatFlightOffers } from '../services/flight-service.js';
-import path from 'path';
-import csv from 'csv-parser';
-import haversine from 'haversine-distance';
 
 
 class FlightFinderStrategy extends Strategy {

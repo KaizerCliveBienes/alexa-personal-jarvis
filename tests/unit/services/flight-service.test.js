@@ -20,7 +20,7 @@ describe('Flight Service', () => {
       fetch.mockResolvedValueOnce({
         status: 200,
         ok: true,
-        json: vi.mockResolvedValueOnce(mockResponse)
+        json: vi.fn().mockResolvedValueOnce(mockResponse)
       });
 
       const result = await getNearestAirportIATACode(mockLocation);
@@ -35,7 +35,7 @@ describe('Flight Service', () => {
       fetch.mockResolvedValueOnce({
         status: 200,
         ok: true,
-        json: vi.mockResolvedValueOnce([])
+        json: vi.fn().mockResolvedValueOnce([])
       });
 
       await expect(getNearestAirportIATACode(mockLocation)).rejects.toThrow("No nearest place retrieved: " + mockLocation);
@@ -51,7 +51,16 @@ describe('Flight Service', () => {
       const mockSerpApiKey = 'test_api_key';
       const mockFlightResponse = { best_flights: [], other_flights: [] };
 
-      // Mocking the getJson function
+      const mockResponse = [
+        { lat: '52.5200', lon: '13.4050' }
+      ];
+
+      fetch.mockResolvedValue({
+        status: 200,
+        ok: true,
+        json: vi.fn().mockResolvedValue(mockResponse)
+      });
+
       vi.mock('serpapi', () => ({
         getJson: vi.fn().mockResolvedValue({ best_flights: [], other_flights: [] }),
       }));

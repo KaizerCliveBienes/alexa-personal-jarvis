@@ -8,8 +8,13 @@ class ReadNewsStrategy extends Strategy {
     this.storeAudioFileTemp = storeAudioFileTemp;
   }
 
-  async execute(_) {
+  async execute(parameters) {
     const content = await fetchLatestNews(this.genai);
+
+    if (parameters.test) {
+      console.info(`Read news intent content: ${content}`);
+      return this.formatTextResponse(content);
+    }
 
     const buffer = Buffer.from(await this.genai.textToSpeech(content));
     const { url, key } = await this.storeAudioFileTemp.uploadAndGetTemporaryUrl(buffer);
@@ -17,6 +22,19 @@ class ReadNewsStrategy extends Strategy {
     console.info("url: ", url, "key:", key);
 
     return this.formatResponse(url)
+  }
+
+  formatTextResponse(content) {
+    return {
+      version: '1.0',
+      response: {
+        outputSpeech: {
+          type: 'PlainText',
+          text: `Here is Jarvis for the news: ${content}`,
+        },
+        shouldEndSession: true,
+      },
+    };
   }
 
   formatResponse(url) {
@@ -35,7 +53,7 @@ class ReadNewsStrategy extends Strategy {
               "stream": {
                 "token": "this-is-the-audio-token-" + Date.now(),
                 "url": url,
-                "offsetInMilliseconds": 0
+                "offsetInMilliseconds": 2500
               }
             }
           }
