@@ -7,7 +7,7 @@ Resources:
     Properties:
       FunctionName: AlexaChatGPTHandlerFunction
       Handler: index.handler  # Points to index.js handler function
-      Runtime: nodejs18.x
+      Runtime: nodejs20.x
       CodeUri: .  # Folder containing index.js
       MemorySize: 128
       Timeout: 45
