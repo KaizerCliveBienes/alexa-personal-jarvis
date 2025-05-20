@@ -2,26 +2,62 @@ import { fetchLatestNews } from '../services/read-news-fetch.js';
 import Strategy from './strategy.js';
 
 class ReadNewsStrategy extends Strategy {
-  constructor(genai) {
+  constructor(genai, storeAudioFileTemp) {
     super();
     this.genai = genai;
+    this.storeAudioFileTemp = storeAudioFileTemp;
   }
 
-  async execute(_) {
-    const latestNews = (await fetchLatestNews(this.genai, 3))
-      .reduce((accumulator, currentValue, currentIndex) => `${accumulator} News #${currentIndex + 1}. ${currentValue}`, '');
+  async execute(parameters) {
+    const content = await fetchLatestNews(this.genai);
 
-    return this.formatResponse(latestNews);
+    if (parameters.test) {
+      console.info(`Read news intent content: ${content}`);
+      return this.formatTextResponse(content);
+    }
+
+    const buffer = Buffer.from(await this.genai.textToSpeech(content));
+    const { url, key } = await this.storeAudioFileTemp.uploadAndGetTemporaryUrl(buffer);
+
+    console.info("url: ", url, "key:", key);
+
+    return this.formatResponse(url)
   }
 
-  formatResponse(content) {
+  formatTextResponse(content) {
     return {
       version: '1.0',
       response: {
         outputSpeech: {
           type: 'PlainText',
-          text: `Jarvis got the following news: ${content}`,
+          text: `Here is Jarvis for the news: ${content}`,
         },
+        shouldEndSession: true,
+      },
+    };
+  }
+
+  formatResponse(url) {
+    return {
+      version: '1.0',
+      response: {
+        outputSpeech: {
+          type: 'PlainText',
+          text: `Here is Jarvis for the news: `,
+        },
+        directives: [
+          {
+            "type": "AudioPlayer.Play",
+            "playBehavior": "REPLACE_ALL",
+            "audioItem": {
+              "stream": {
+                "token": "this-is-the-audio-token-" + Date.now(),
+                "url": url,
+                "offsetInMilliseconds": 2500
+              }
+            }
+          }
+        ],
         shouldEndSession: true,
       },
     };

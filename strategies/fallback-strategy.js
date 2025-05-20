@@ -1,7 +1,7 @@
 import Strategy from './strategy.js';
 
 class FallbackStrategy extends Strategy {
-  async execute(parameters) {
+  async execute() {
     return this.formatResponse();
   }
 

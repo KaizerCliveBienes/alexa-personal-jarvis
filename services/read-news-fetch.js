@@ -1,32 +1,43 @@
 import { XMLParser } from 'fast-xml-parser';
 import fetch from 'node-fetch';
+import config from '../config/config.js';
 
-export const fetchLatestNews = async (genai, count = 3) => {
-  const response = await fetch('https://www.manilatimes.net/news/feed/', {
-    method: 'GET',
-  });
-
-  if (response.status !== 200 || !response.ok) {
-    throw new Error("Can't fetch!");
-  }
-
-  const parser = new XMLParser();
-  const newsList = parser.parse(await response.text());
-
-  const newsItems = (newsList.rss.channel.item ?? []).slice(0, count);
-
+export const fetchLatestNews = async (genai) => {
+  const newsSources = config.readNews.newsSources
   const newsSummary = [];
-  for (let i in newsItems) {
-    newsSummary.push(await summaryNews(genai, newsItems[i].title, newsItems[i].description));
+  for (let index = 0; index < newsSources.length; index++) {
+    const newsSource = newsSources[index];
+    
+    const response = await fetch(newsSource.url, {
+      method: 'GET',
+    });
+
+    if (response.status !== 200 || !response.ok) {
+      throw new Error(`Can't fetch from ${newsSource.source}`);
+    }
+
+    const parser = new XMLParser();
+    const newsList = parser.parse(await response.text());
+
+    const count = newsSource.limit ?? 5
+    const newsItems = (newsList.rss.channel.item ?? []).slice(0, count);
+    for (let i in newsItems) {
+      newsSummary.push({
+        source: newsSource.source,
+        title: newsItems[i].title,
+        description: newsItems[i].description,
+      });
+    }
   }
 
-  return newsSummary;
+  const summary = await summaryNews(genai, JSON.stringify(newsSummary));
+  return summary;
 };
 
-const summaryNews = async (genai, title, fullDescription) => {
+const summaryNews = async (genai, newsSummary) => {
   return await genai.chatQuery(
-    "You are a helpful news broadcaster that is responding via text but will be converted into audio afterwards. Your task is to summarize the given news title and description.",
-    `title: ${title} description: ${fullDescription}`,
+    config.readNews.chatQuery,
+    `${newsSummary}`
   );
 };
 
