@@ -67,4 +67,5 @@ jobs:
           aws lambda update-function-code \
             --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
             --zip-file fileb://deployment_package.zip \
-            --publish # Publishes a new version with each update
+            --publish \
+            | jq 'del(.Environment)'
