@@ -1,0 +1,65 @@
+name: test and deploy
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+  pull_request:
+    branches:
+      - main # Trigger on pull requests to the main branch
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Or your desired Node.js version (e.g., 18, 20)
+          cache: 'yarn' # Caches Yarn dependencies to speed up builds
+
+      - name: Install dependencies
+        run: yarn install --immutable # Use yarn install --immutable for clean and locked installs in CI
+
+      - name: Run tests
+        run: yarn test
+
+  deploy_lambda:
+    needs: build_and_test # This job depends on the successful completion of build_and_test
+    if: github.ref == 'refs/heads/main' # Only deploy if the push is to the main branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Must match the version used in build_and_test
+          cache: 'yarn'
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }} # Recommended for OIDC
+
+      - name: Prepare deployment package
+        run: |
+          yarn install --production --frozen-lockfile # Install only production dependencies
+          # Create the zip file including the production node_modules
+          # Exclude .git folder, .env files, and the .bin folder within node_modules
+          zip -r deployment_package.zip . -x ".git/*" ".env*" "node_modules/.bin/*"
+          # If your lambda function is in a subfolder, adjust the zip command. E.g.:
+
+      - name: Deploy to AWS Lambda
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
+            --zip-file fileb://deployment_package.zip \
+            --publish # Publishes a new version with each update
