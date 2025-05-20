@@ -11,6 +11,8 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout code
@@ -32,6 +34,9 @@ jobs:
     needs: build_and_test # This job depends on the successful completion of build_and_test
     if: github.ref == 'refs/heads/main' # Only deploy if the push is to the main branch
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Checkout code
