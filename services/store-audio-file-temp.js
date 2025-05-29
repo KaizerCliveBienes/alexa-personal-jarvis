@@ -12,24 +12,27 @@ class StoreAudioFileTemp {
         Bucket: this.bucketName,
         Key: s3Key,
         Body: mp3Buffer,
-        ContentType: 'audio/mp3',
+        ContentType: "audio/mp3",
       };
 
       const uploadResult = await this.s3Client.upload(uploadParams).promise();
-      console.info('File uploaded successfully:', uploadResult.Location);
+      console.info("File uploaded successfully:", uploadResult.Location);
 
       const signedUrlParams = {
         Bucket: this.bucketName,
         Key: s3Key,
-        Expires: this.expirationSeconds
+        Expires: this.expirationSeconds,
       };
 
-      const temporaryUrl = this.s3Client.getSignedUrl('getObject', signedUrlParams);
-      console.info('Temporary S3 URL:', temporaryUrl);
+      const temporaryUrl = this.s3Client.getSignedUrl(
+        "getObject",
+        signedUrlParams,
+      );
+      console.info("Temporary S3 URL:", temporaryUrl);
 
       return { url: temporaryUrl, key: s3Key };
     } catch (error) {
-      console.error('Error uploading to S3:', error);
+      console.error("Error uploading to S3:", error);
       throw error;
     }
   }

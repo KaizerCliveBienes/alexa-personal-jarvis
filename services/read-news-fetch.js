@@ -1,15 +1,15 @@
-import { XMLParser } from 'fast-xml-parser';
-import fetch from 'node-fetch';
-import config from '../config/config.js';
+import { XMLParser } from "fast-xml-parser";
+import fetch from "node-fetch";
+import config from "../config/config.js";
 
 export const fetchLatestNews = async (genai) => {
-  const newsSources = config.readNews.newsSources
+  const newsSources = config.readNews.newsSources;
   const newsSummary = [];
   for (let index = 0; index < newsSources.length; index++) {
     const newsSource = newsSources[index];
-    
+
     const response = await fetch(newsSource.url, {
-      method: 'GET',
+      method: "GET",
     });
 
     if (response.status !== 200 || !response.ok) {
@@ -19,7 +19,7 @@ export const fetchLatestNews = async (genai) => {
     const parser = new XMLParser();
     const newsList = parser.parse(await response.text());
 
-    const count = newsSource.limit ?? 5
+    const count = newsSource.limit ?? 5;
     const newsItems = (newsList.rss.channel.item ?? []).slice(0, count);
     for (let i in newsItems) {
       newsSummary.push({
@@ -35,9 +35,5 @@ export const fetchLatestNews = async (genai) => {
 };
 
 const summaryNews = async (genai, newsSummary) => {
-  return await genai.chatQuery(
-    config.readNews.chatQuery,
-    `${newsSummary}`
-  );
+  return await genai.chatQuery(config.readNews.chatQuery, `${newsSummary}`);
 };
-

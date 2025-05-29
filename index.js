@@ -1,31 +1,48 @@
-import { OpenAI } from 'openai';
-import Context from './strategies/context.js';
-import ReadNewsStrategy from './strategies/read-news-strategy.js';
-import StopStrategy from './strategies/stop-strategy.js';
-import FallbackStrategy from './strategies/fallback-strategy.js';
-import ChatStrategy from './strategies/chat-strategy.js';
-import TranspoPathStrategy from './strategies/transpo-path-strategy.js';
-import FlightFinderStrategy from './strategies/flight-finder-strategy.js';
-import ChatGPT from './genai/chatgpt.js';
-import config from './config/config.js';
-import AWS from 'aws-sdk';
-import StoreAudioFileTemp from './services/store-audio-file-temp.js';
+import { OpenAI } from "openai";
+import Context from "./strategies/context.js";
+import ReadNewsStrategy from "./strategies/read-news-strategy.js";
+import StopStrategy from "./strategies/stop-strategy.js";
+import FallbackStrategy from "./strategies/fallback-strategy.js";
+import ChatStrategy from "./strategies/chat-strategy.js";
+import TranspoPathStrategy from "./strategies/transpo-path-strategy.js";
+import FlightFinderStrategy from "./strategies/flight-finder-strategy.js";
+import ChatGPT from "./genai/chatgpt.js";
+import config from "./config/config.js";
+import AWS from "aws-sdk";
+import StoreAudioFileTemp from "./services/store-audio-file-temp.js";
+import { SSMClient } from "@aws-sdk/client-ssm";
+import { getParamOrDefault } from "./services/get-ssm-parameters.js";
+
+const ssmClient = new SSMClient({
+  region: process.env.AWS_REGION || "us-east-1",
+});
 
 const genai = new ChatGPT(
   new OpenAI({
-    apiKey: process.env.CHATGPT_API_KEY,
+    apiKey: await getParamOrDefault(
+      ssmClient,
+      "chatgpt-api-key",
+      "CHATGPT_API_KEY",
+      true,
+    ),
   }),
   config.chatgpt.model,
 );
 
-const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
-
-const serpApiKey = process.env.SERP_API_KEY;
-
 const s3Client = new AWS.S3({
-  accessKeyId: process.env.S3_ACCESS_KEY_ID,
-  secretAccessKey: process.env.S3_ACCESS_KEY_SECRET,
-  region: process.env.S3_REGION
+  accessKeyId: await getParamOrDefault(
+    ssmClient,
+    "aws-s3-access-key-id",
+    "S3_ACCESS_KEY_ID",
+    true,
+  ),
+  secretAccessKey: await getParamOrDefault(
+    ssmClient,
+    "aws-s3-access-key-secret",
+    "S3_ACCESS_KEY_SECRET",
+    true,
+  ),
+  region: process.env.S3_REGION,
 });
 
 const s3BucketName = process.env.S3_BUCKET_NAME;
@@ -44,8 +61,9 @@ export const handler = async (event, _) => {
         case config.alexa.event.readNewsIntent:
           parameters = {
             ...parameters,
-            test: (event.request?.intent?.slots?.test?.value ?? "false" === "true"),
-          }
+            test:
+              event.request?.intent?.slots?.test?.value ?? "false" === "true",
+          };
 
           context.setStrategy(new ReadNewsStrategy(genai, storeAudioFileTemp));
           break;
@@ -58,12 +76,7 @@ export const handler = async (event, _) => {
             userQuery: event.request.intent.slots.query.value,
           };
 
-          context.setStrategy(
-            new ChatStrategy(
-              genai,
-              storeAudioFileTemp,
-            )
-          );
+          context.setStrategy(new ChatStrategy(genai, storeAudioFileTemp));
           break;
         case config.alexa.event.transpoPathIntent:
           parameters = {
@@ -74,6 +87,12 @@ export const handler = async (event, _) => {
             time: event.request.intent.slots.time.value,
           };
 
+          const googleMapsApiKey = await getParamOrDefault(
+            ssmClient,
+            "google-maps-api-key",
+            "GOOGLE_MAPS_API_KEY",
+            true,
+          );
           context.setStrategy(new TranspoPathStrategy(googleMapsApiKey));
           break;
         case config.alexa.event.flightFinderIntent:
@@ -84,9 +103,15 @@ export const handler = async (event, _) => {
             destination: event.request.intent.slots.destination.value,
             departureDate: event.request.intent.slots.departureDate.value,
             returnDate: event.request.intent.slots.returnDate.value,
-            test: (event.request.intent.slots?.test?.value ?? "false" === "true"),
+            test: event.request.intent.slots?.test?.value ?? "false" === "true",
           };
 
+          const serpApiKey = await getParamOrDefault(
+            ssmClient,
+            "serp-api-key",
+            "SERP_API_KEY",
+            true,
+          );
           context.setStrategy(new FlightFinderStrategy(serpApiKey, genai));
           break;
         default:
@@ -96,7 +121,7 @@ export const handler = async (event, _) => {
 
     return await context.executeStrategy(parameters);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
 
     return {
       version: config.alexa.version,

@@ -1,9 +1,7 @@
 class Strategy {
-  async execute(parameters) {
-  }
+  async execute(parameters) {}
 
-  formatResponse(content) {
-  }
+  formatResponse(content) {}
 }
 
 export default Strategy;

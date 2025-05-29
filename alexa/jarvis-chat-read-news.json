@@ -1,210 +1,210 @@
 {
-    "interactionModel": {
-        "languageModel": {
-            "invocationName": "jarvis chat",
-            "modelConfiguration": {
-                "fallbackIntentSensitivity": {
-                    "level": "LOW"
-                }
-            },
-            "intents": [
-                {
-                    "name": "AMAZON.CancelIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.HelpIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.StopIntent",
-                    "samples": []
-                },
-                {
-                    "name": "ChatGPTIntent",
-                    "slots": [
-                        {
-                            "name": "query",
-                            "type": "AMAZON.SearchQuery"
-                        }
-                    ],
-                    "samples": [
-                        "Tell me about {query}",
-                        "I want to know about {query}",
-                        "Can you explain {query}",
-                        "Find information on {query}",
-                        "Look up {query} for me",
-                        "Give me details about {query}",
-                        "What is {query}",
-                        "Search for {query}",
-                        "Tell me everything about {query}",
-                        "I need info on {query}",
-                        "Give me a summary of {query}",
-                        "Help me understand {query}",
-                        "Whats the meaning of {query}",
-                        "Can you find {query} for me",
-                        "Look up details on {query}",
-                        "What does {query} mean",
-                        "Tell me more about {query}",
-                        "Im curious about {query}",
-                        "I want more details about {query}",
-                        "Give me facts about {query}",
-                        "Explain {query} to me",
-                        "What can you tell me about {query}",
-                        "Can you define {query}",
-                        "Tell me the latest news on {query}",
-                        "Whats happening with {query}",
-                        "Tell me some background about {query}",
-                        "Break down {query} for me",
-                        "Give me an overview of {query}",
-                        "Can you summarize {query}",
-                        "Tell me something about {query}",
-                        "Id like to hear about {query}",
-                        "I need help understanding {query}",
-                        "Whats the story behind {query}",
-                        "Can you research {query} for me",
-                        "Pull up info about {query}",
-                        "Can you retrieve details on {query}",
-                        "Find me something on {query}",
-                        "Im looking for details on {query}",
-                        "Can you check what {query} is",
-                        "Let me know about {query}",
-                        "Can you describe {query}",
-                        "What information do you have on {query}",
-                        "I want a quick explanation of {query}",
-                        "Im interested in {query}",
-                        "Can you provide insights on {query}",
-                        "What do you know about {query}",
-                        "I need details about {query}",
-                        "Whats the definition of {query}",
-                        "How would you explain {query}",
-                        "Could you help me learn about {query}"
-                    ]
-                },
-                {
-                    "name": "AMAZON.NavigateHomeIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.FallbackIntent",
-                    "samples": []
-                },
-                {
-                    "name": "ReadNewsIntent",
-                    "slots": [],
-                    "samples": [
-                        "what is happening in the news",
-                        "what is the current news",
-                        "what are the news",
-                        "what is the latest news",
-                        "can you read the news today",
-                        "what is the news today"
-                    ]
-                }
-            ],
-            "types": []
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "jarvis chat",
+      "modelConfiguration": {
+        "fallbackIntentSensitivity": {
+          "level": "LOW"
+        }
+      },
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
         },
-        "dialog": {
-            "intents": [
-                {
-                    "name": "ChatGPTIntent",
-                    "delegationStrategy": "ALWAYS",
-                    "confirmationRequired": false,
-                    "prompts": {},
-                    "slots": [
-                        {
-                            "name": "query",
-                            "type": "AMAZON.SearchQuery",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.492854936987.1474443463483"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "delegationStrategy": "ALWAYS"
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
         },
-        "prompts": [
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "ChatGPTIntent",
+          "slots": [
             {
-                "id": "Elicit.Slot.492854936987.1474443463483",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "what would you like to ask?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "what are you trying to ask?"
-                    }
-                ]
-            },
-            {
-                "id": "Confirm.Intent.366780103554",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "What would you like to ask?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "What do you want to ask?"
-                    }
-                ]
-            },
-            {
-                "id": "Elicit.Slot.139613860137.1544928992564",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "where do you want to go?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "where is the destination?"
-                    }
-                ]
-            },
-            {
-                "id": "Elicit.Slot.139613860137.613309292145",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "from where are you starting?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "where are you coming from?"
-                    }
-                ]
-            },
-            {
-                "id": "Elicit.Slot.667360667934.542169100345",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "what is the origin city?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "where are you starting from?"
-                    }
-                ]
-            },
-            {
-                "id": "Elicit.Slot.667360667934.776729077370",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "where is the destination?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "to where do you want to go?"
-                    }
-                ]
+              "name": "query",
+              "type": "AMAZON.SearchQuery"
             }
+          ],
+          "samples": [
+            "Tell me about {query}",
+            "I want to know about {query}",
+            "Can you explain {query}",
+            "Find information on {query}",
+            "Look up {query} for me",
+            "Give me details about {query}",
+            "What is {query}",
+            "Search for {query}",
+            "Tell me everything about {query}",
+            "I need info on {query}",
+            "Give me a summary of {query}",
+            "Help me understand {query}",
+            "Whats the meaning of {query}",
+            "Can you find {query} for me",
+            "Look up details on {query}",
+            "What does {query} mean",
+            "Tell me more about {query}",
+            "Im curious about {query}",
+            "I want more details about {query}",
+            "Give me facts about {query}",
+            "Explain {query} to me",
+            "What can you tell me about {query}",
+            "Can you define {query}",
+            "Tell me the latest news on {query}",
+            "Whats happening with {query}",
+            "Tell me some background about {query}",
+            "Break down {query} for me",
+            "Give me an overview of {query}",
+            "Can you summarize {query}",
+            "Tell me something about {query}",
+            "Id like to hear about {query}",
+            "I need help understanding {query}",
+            "Whats the story behind {query}",
+            "Can you research {query} for me",
+            "Pull up info about {query}",
+            "Can you retrieve details on {query}",
+            "Find me something on {query}",
+            "Im looking for details on {query}",
+            "Can you check what {query} is",
+            "Let me know about {query}",
+            "Can you describe {query}",
+            "What information do you have on {query}",
+            "I want a quick explanation of {query}",
+            "Im interested in {query}",
+            "Can you provide insights on {query}",
+            "What do you know about {query}",
+            "I need details about {query}",
+            "Whats the definition of {query}",
+            "How would you explain {query}",
+            "Could you help me learn about {query}"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "ReadNewsIntent",
+          "slots": [],
+          "samples": [
+            "what is happening in the news",
+            "what is the current news",
+            "what are the news",
+            "what is the latest news",
+            "can you read the news today",
+            "what is the news today"
+          ]
+        }
+      ],
+      "types": []
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "ChatGPTIntent",
+          "delegationStrategy": "ALWAYS",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "query",
+              "type": "AMAZON.SearchQuery",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.492854936987.1474443463483"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.492854936987.1474443463483",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "what would you like to ask?"
+          },
+          {
+            "type": "PlainText",
+            "value": "what are you trying to ask?"
+          }
         ]
-    }
+      },
+      {
+        "id": "Confirm.Intent.366780103554",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "What would you like to ask?"
+          },
+          {
+            "type": "PlainText",
+            "value": "What do you want to ask?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.139613860137.1544928992564",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "where do you want to go?"
+          },
+          {
+            "type": "PlainText",
+            "value": "where is the destination?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.139613860137.613309292145",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "from where are you starting?"
+          },
+          {
+            "type": "PlainText",
+            "value": "where are you coming from?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.667360667934.542169100345",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "what is the origin city?"
+          },
+          {
+            "type": "PlainText",
+            "value": "where are you starting from?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.667360667934.776729077370",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "where is the destination?"
+          },
+          {
+            "type": "PlainText",
+            "value": "to where do you want to go?"
+          }
+        ]
+      }
+    ]
+  }
 }

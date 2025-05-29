@@ -1,260 +1,254 @@
 {
-    "interactionModel": {
-        "languageModel": {
-            "invocationName": "jarvis transpo",
-            "intents": [
-                {
-                    "name": "AMAZON.CancelIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.HelpIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.StopIntent",
-                    "samples": []
-                },
-                {
-                    "name": "HelloWorldIntent",
-                    "slots": [],
-                    "samples": [
-                        "hello",
-                        "how are you",
-                        "say hi world",
-                        "say hi",
-                        "hi",
-                        "say hello world",
-                        "say hello"
-                    ]
-                },
-                {
-                    "name": "AMAZON.NavigateHomeIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.FallbackIntent",
-                    "samples": []
-                },
-                {
-                    "name": "TranspoPathIntent",
-                    "slots": [
-                        {
-                            "name": "date",
-                            "type": "AMAZON.DATE",
-                            "samples": [
-                                "i leave at {date}"
-                            ]
-                        },
-                        {
-                            "name": "time",
-                            "type": "AMAZON.TIME",
-                            "samples": [
-                                "at {time}",
-                                "planning to leave at {time}",
-                                "i am leaving at {time}"
-                            ]
-                        },
-                        {
-                            "name": "from",
-                            "type": "AMAZON.City",
-                            "samples": [
-                                "coming from {from}",
-                                "starting from {from}",
-                                "from {from}"
-                            ]
-                        },
-                        {
-                            "name": "to",
-                            "type": "AMAZON.City",
-                            "samples": [
-                                "destination is {to}",
-                                "going to {to} ",
-                                "to {to}"
-                            ]
-                        }
-                    ],
-                    "samples": [
-                        "Find me a route from {from} to {to} on {date} at {time}",
-                        "What is the best transportation from {from} to {to} for {date} at {time}",
-                        "How do I get from {from} to {to} on {date} leaving at {time}",
-                        "Give me directions from {from} to {to} on {date} at {time}",
-                        "What are the transportation options from {from} to {to} on {date} at {time}",
-                        "Find transportation from {from} to {to} on {date} leaving at {time}",
-                        "What is the best way to travel from {from} to {to} at {time} on {date}",
-                        "Can you help me get from {from} to {to} on {date} at {time}",
-                        "What is the route from {from} to {to} on {date} leaving at {time}",
-                        "Tell me how to get from {from} to {to} on {date} at {time}",
-                        "What is the quickest route from {from} to {to} on {date} at {time}",
-                        "Find me the best transport from {from} to {to} on {date} at {time}",
-                        "How can I travel from {from} to {to} on {date} leaving at {time}",
-                        "Find a way to get from {from} to {to} on {date} at {time}",
-                        "What is the transportation option from {from} to {to} on {date} leaving at {time}",
-                        "Give me the best route from {from} to {to} on {date} leaving at {time}",
-                        "What transport should I take from {from} to {to} at {time} on {date}",
-                        "What are my options for getting from {from} to {to} on {date} at {time}",
-                        "What is the most efficient way to travel from {from} to {to} on {date} at {time}",
-                        "Tell me how to get from {from} to {to} on {date} leaving at {time}",
-                        "Find the best way to go from {from} to {to} on {date} at {time}",
-                        "Can you help me with directions from {from} to {to} on {date} at {time}",
-                        "What is the transportation route from {from} to {to} on {date} leaving at {time}",
-                        "Find the best transportation from {from} to {to} on {date} leaving at {time}",
-                        "What time should I leave for a trip from {from} to {to} on {date}",
-                        "Give me directions for getting from {from} to {to} on {date} at {time}",
-                        "Tell me the best transport option for going from {from} to {to} on {date} at {time}",
-                        "How do I travel from {from} to {to} at {time} on {date}",
-                        "What is the best route from {from} to {to} on {date} leaving at {time}",
-                        "How do I get from {from} to {to}",
-                        "What is the best way to go from {from} to {to}",
-                        "Which tram should I take from {from} to {to}",
-                        "What train should I take to get to {to} from {from}",
-                        "How long does it take from {from} to {to}",
-                        "Find me the fastest route to {to} from {from}",
-                        "When is the next train from {from} to {to}",
-                        "Show me the tram schedule from {from} to {to}",
-                        "What is the next available tram from {from}",
-                        "When is the next available bus to {to}",
-                        "How can I reach {to} using public transport",
-                        "What is the best route from {from} to {to}",
-                        "How long does it take to get from {from} to {to}",
-                        "Find me a train from {from} to {to}",
-                        "What bus should I take from {from} to {to}",
-                        "Show me the next tram from {from} to {to}",
-                        "How do I reach {to} from {from}",
-                        "Which train line goes from {from} to {to}",
-                        "What is the next available connection from {from} to {to}",
-                        "Find the cheapest way from {from} to {to}",
-                        "How many transfers are needed from {from} to {to}",
-                        "Which U-Bahn goes from {from} to {to}",
-                        "How do I get from {from} to {to} at {time}",
-                        "What is the fastest route from {from} to {to} on {date}",
-                        "Find me a bus from {from} to {to} tomorrow at {time}",
-                        "What is the next available tram from {from} to {to} at {time}",
-                        "What train goes from {from} to {to} next Monday",
-                        "Show me a connection from {from} to {to} on {date} at {time}",
-                        "How do I get from {from} to {to} this evening",
-                        "What is the best way to travel from {from} to {to} next weekend",
-                        "Is there a direct train from {from} to {to} at {time}",
-                        "Find me a bus from {from} to {to} early morning tomorrow",
-                        "What is the best way to travel from {from} to {to} on Sunday",
-                        "Show me the fastest route from {from} to {to} tomorrow at noon",
-                        "How long does it take to reach {to} from {from} next Friday",
-                        "What time does the first train leave from {from} to {to} on {date}",
-                        "Which U-Bahn should I take from {from} to {to} at {time} on {date}"
-                    ]
-                }
-            ],
-            "types": []
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "jarvis transpo",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
         },
-        "dialog": {
-            "intents": [
-                {
-                    "name": "TranspoPathIntent",
-                    "confirmationRequired": false,
-                    "prompts": {},
-                    "slots": [
-                        {
-                            "name": "date",
-                            "type": "AMAZON.DATE",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.1602600380848.573984330683"
-                            }
-                        },
-                        {
-                            "name": "time",
-                            "type": "AMAZON.TIME",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.1602600380848.131674013218"
-                            }
-                        },
-                        {
-                            "name": "from",
-                            "type": "AMAZON.City",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.1602600380848.1056673035681"
-                            }
-                        },
-                        {
-                            "name": "to",
-                            "type": "AMAZON.City",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.1602600380848.1235985757198"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "delegationStrategy": "ALWAYS"
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
         },
-        "prompts": [
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "HelloWorldIntent",
+          "slots": [],
+          "samples": [
+            "hello",
+            "how are you",
+            "say hi world",
+            "say hi",
+            "hi",
+            "say hello world",
+            "say hello"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "TranspoPathIntent",
+          "slots": [
             {
-                "id": "Elicit.Slot.1602600380848.1056673035681",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "where is your origin?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "where do you plan to start?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "where are you coming from?"
-                    }
-                ]
+              "name": "date",
+              "type": "AMAZON.DATE",
+              "samples": ["i leave at {date}"]
             },
             {
-                "id": "Elicit.Slot.1602600380848.1235985757198",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "where do you plan to go?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "where is your destination?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "where do you intend to go?"
-                    }
-                ]
+              "name": "time",
+              "type": "AMAZON.TIME",
+              "samples": [
+                "at {time}",
+                "planning to leave at {time}",
+                "i am leaving at {time}"
+              ]
             },
             {
-                "id": "Elicit.Slot.1602600380848.573984330683",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "when do you go?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "when do you plan to leave?"
-                    }
-                ]
+              "name": "from",
+              "type": "AMAZON.City",
+              "samples": [
+                "coming from {from}",
+                "starting from {from}",
+                "from {from}"
+              ]
             },
             {
-                "id": "Elicit.Slot.1602600380848.131674013218",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "at what time?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "what time are you leaving?"
-                    }
-                ]
+              "name": "to",
+              "type": "AMAZON.City",
+              "samples": ["destination is {to}", "going to {to} ", "to {to}"]
             }
+          ],
+          "samples": [
+            "Find me a route from {from} to {to} on {date} at {time}",
+            "What is the best transportation from {from} to {to} for {date} at {time}",
+            "How do I get from {from} to {to} on {date} leaving at {time}",
+            "Give me directions from {from} to {to} on {date} at {time}",
+            "What are the transportation options from {from} to {to} on {date} at {time}",
+            "Find transportation from {from} to {to} on {date} leaving at {time}",
+            "What is the best way to travel from {from} to {to} at {time} on {date}",
+            "Can you help me get from {from} to {to} on {date} at {time}",
+            "What is the route from {from} to {to} on {date} leaving at {time}",
+            "Tell me how to get from {from} to {to} on {date} at {time}",
+            "What is the quickest route from {from} to {to} on {date} at {time}",
+            "Find me the best transport from {from} to {to} on {date} at {time}",
+            "How can I travel from {from} to {to} on {date} leaving at {time}",
+            "Find a way to get from {from} to {to} on {date} at {time}",
+            "What is the transportation option from {from} to {to} on {date} leaving at {time}",
+            "Give me the best route from {from} to {to} on {date} leaving at {time}",
+            "What transport should I take from {from} to {to} at {time} on {date}",
+            "What are my options for getting from {from} to {to} on {date} at {time}",
+            "What is the most efficient way to travel from {from} to {to} on {date} at {time}",
+            "Tell me how to get from {from} to {to} on {date} leaving at {time}",
+            "Find the best way to go from {from} to {to} on {date} at {time}",
+            "Can you help me with directions from {from} to {to} on {date} at {time}",
+            "What is the transportation route from {from} to {to} on {date} leaving at {time}",
+            "Find the best transportation from {from} to {to} on {date} leaving at {time}",
+            "What time should I leave for a trip from {from} to {to} on {date}",
+            "Give me directions for getting from {from} to {to} on {date} at {time}",
+            "Tell me the best transport option for going from {from} to {to} on {date} at {time}",
+            "How do I travel from {from} to {to} at {time} on {date}",
+            "What is the best route from {from} to {to} on {date} leaving at {time}",
+            "How do I get from {from} to {to}",
+            "What is the best way to go from {from} to {to}",
+            "Which tram should I take from {from} to {to}",
+            "What train should I take to get to {to} from {from}",
+            "How long does it take from {from} to {to}",
+            "Find me the fastest route to {to} from {from}",
+            "When is the next train from {from} to {to}",
+            "Show me the tram schedule from {from} to {to}",
+            "What is the next available tram from {from}",
+            "When is the next available bus to {to}",
+            "How can I reach {to} using public transport",
+            "What is the best route from {from} to {to}",
+            "How long does it take to get from {from} to {to}",
+            "Find me a train from {from} to {to}",
+            "What bus should I take from {from} to {to}",
+            "Show me the next tram from {from} to {to}",
+            "How do I reach {to} from {from}",
+            "Which train line goes from {from} to {to}",
+            "What is the next available connection from {from} to {to}",
+            "Find the cheapest way from {from} to {to}",
+            "How many transfers are needed from {from} to {to}",
+            "Which U-Bahn goes from {from} to {to}",
+            "How do I get from {from} to {to} at {time}",
+            "What is the fastest route from {from} to {to} on {date}",
+            "Find me a bus from {from} to {to} tomorrow at {time}",
+            "What is the next available tram from {from} to {to} at {time}",
+            "What train goes from {from} to {to} next Monday",
+            "Show me a connection from {from} to {to} on {date} at {time}",
+            "How do I get from {from} to {to} this evening",
+            "What is the best way to travel from {from} to {to} next weekend",
+            "Is there a direct train from {from} to {to} at {time}",
+            "Find me a bus from {from} to {to} early morning tomorrow",
+            "What is the best way to travel from {from} to {to} on Sunday",
+            "Show me the fastest route from {from} to {to} tomorrow at noon",
+            "How long does it take to reach {to} from {from} next Friday",
+            "What time does the first train leave from {from} to {to} on {date}",
+            "Which U-Bahn should I take from {from} to {to} at {time} on {date}"
+          ]
+        }
+      ],
+      "types": []
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "TranspoPathIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "date",
+              "type": "AMAZON.DATE",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1602600380848.573984330683"
+              }
+            },
+            {
+              "name": "time",
+              "type": "AMAZON.TIME",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1602600380848.131674013218"
+              }
+            },
+            {
+              "name": "from",
+              "type": "AMAZON.City",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1602600380848.1056673035681"
+              }
+            },
+            {
+              "name": "to",
+              "type": "AMAZON.City",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1602600380848.1235985757198"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.1602600380848.1056673035681",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "where is your origin?"
+          },
+          {
+            "type": "PlainText",
+            "value": "where do you plan to start?"
+          },
+          {
+            "type": "PlainText",
+            "value": "where are you coming from?"
+          }
         ]
-    }
+      },
+      {
+        "id": "Elicit.Slot.1602600380848.1235985757198",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "where do you plan to go?"
+          },
+          {
+            "type": "PlainText",
+            "value": "where is your destination?"
+          },
+          {
+            "type": "PlainText",
+            "value": "where do you intend to go?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1602600380848.573984330683",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "when do you go?"
+          },
+          {
+            "type": "PlainText",
+            "value": "when do you plan to leave?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1602600380848.131674013218",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "at what time?"
+          },
+          {
+            "type": "PlainText",
+            "value": "what time are you leaving?"
+          }
+        ]
+      }
+    ]
+  }
 }

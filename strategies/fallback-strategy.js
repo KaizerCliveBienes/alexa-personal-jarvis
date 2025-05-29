@@ -1,4 +1,4 @@
-import Strategy from './strategy.js';
+import Strategy from "./strategy.js";
 
 class FallbackStrategy extends Strategy {
   async execute() {
@@ -7,11 +7,11 @@ class FallbackStrategy extends Strategy {
 
   formatResponse(_) {
     return {
-      version: '1.0',
+      version: "1.0",
       response: {
         outputSpeech: {
-          type: 'PlainText',
-          text: 'Jarvis responded: Sorry, I didn\'t understand that.',
+          type: "PlainText",
+          text: "Jarvis responded: Sorry, I didn't understand that.",
         },
         shouldEndSession: false,
       },

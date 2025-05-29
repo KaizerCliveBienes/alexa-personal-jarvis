@@ -1,5 +1,5 @@
-import { fetchLatestNews } from '../services/read-news-fetch.js';
-import Strategy from './strategy.js';
+import { fetchLatestNews } from "../services/read-news-fetch.js";
+import Strategy from "./strategy.js";
 
 class ReadNewsStrategy extends Strategy {
   constructor(genai, storeAudioFileTemp) {
@@ -17,19 +17,20 @@ class ReadNewsStrategy extends Strategy {
     }
 
     const buffer = Buffer.from(await this.genai.textToSpeech(content));
-    const { url, key } = await this.storeAudioFileTemp.uploadAndGetTemporaryUrl(buffer);
+    const { url, key } =
+      await this.storeAudioFileTemp.uploadAndGetTemporaryUrl(buffer);
 
     console.info("url: ", url, "key:", key);
 
-    return this.formatResponse(url)
+    return this.formatResponse(url);
   }
 
   formatTextResponse(content) {
     return {
-      version: '1.0',
+      version: "1.0",
       response: {
         outputSpeech: {
-          type: 'PlainText',
+          type: "PlainText",
           text: `Here is Jarvis for the news: ${content}`,
         },
         shouldEndSession: true,
@@ -39,24 +40,24 @@ class ReadNewsStrategy extends Strategy {
 
   formatResponse(url) {
     return {
-      version: '1.0',
+      version: "1.0",
       response: {
         outputSpeech: {
-          type: 'PlainText',
+          type: "PlainText",
           text: `Here is Jarvis for the news: `,
         },
         directives: [
           {
-            "type": "AudioPlayer.Play",
-            "playBehavior": "REPLACE_ALL",
-            "audioItem": {
-              "stream": {
-                "token": "this-is-the-audio-token-" + Date.now(),
-                "url": url,
-                "offsetInMilliseconds": 2500
-              }
-            }
-          }
+            type: "AudioPlayer.Play",
+            playBehavior: "REPLACE_ALL",
+            audioItem: {
+              stream: {
+                token: "this-is-the-audio-token-" + Date.now(),
+                url: url,
+                offsetInMilliseconds: 2500,
+              },
+            },
+          },
         ],
         shouldEndSession: true,
       },

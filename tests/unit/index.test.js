@@ -1,28 +1,28 @@
-import { describe, it, beforeEach, afterEach, expect, vi } from 'vitest';
-import { handler } from '../../index.js';
-import Context from '../../strategies/context.js';
-import ReadNewsStrategy from '../../strategies/read-news-strategy.js';
-import StopStrategy from '../../strategies/stop-strategy.js';
-import FallbackStrategy from '../../strategies/fallback-strategy.js';
-import ChatStrategy from '../../strategies/chat-strategy.js';
-import TranspoPathStrategy from '../../strategies/transpo-path-strategy.js';
-import FlightFinderStrategy from '../../strategies/flight-finder-strategy.js';
+import { describe, it, beforeEach, afterEach, expect, vi } from "vitest";
+import { handler } from "../../index.js";
+import Context from "../../strategies/context.js";
+import ReadNewsStrategy from "../../strategies/read-news-strategy.js";
+import StopStrategy from "../../strategies/stop-strategy.js";
+import FallbackStrategy from "../../strategies/fallback-strategy.js";
+import ChatStrategy from "../../strategies/chat-strategy.js";
+import TranspoPathStrategy from "../../strategies/transpo-path-strategy.js";
+import FlightFinderStrategy from "../../strategies/flight-finder-strategy.js";
 
-vi.mock('../../strategies/context.js');
-vi.mock('../../strategies/read-news-strategy.js');
-vi.mock('../../strategies/stop-strategy.js');
-vi.mock('../../strategies/fallback-strategy.js');
-vi.mock('../../strategies/chat-strategy.js');
-vi.mock('../../strategies/transpo-path-strategy.js');
-vi.mock('../../strategies/flight-finder-strategy.js');
-vi.mock('openai', () => {
+vi.mock("../../strategies/context.js");
+vi.mock("../../strategies/read-news-strategy.js");
+vi.mock("../../strategies/stop-strategy.js");
+vi.mock("../../strategies/fallback-strategy.js");
+vi.mock("../../strategies/chat-strategy.js");
+vi.mock("../../strategies/transpo-path-strategy.js");
+vi.mock("../../strategies/flight-finder-strategy.js");
+vi.mock("openai", () => {
   const mockOpenAI = vi.fn();
 
   mockOpenAI.mockImplementation(() => ({
     chat: {
       completions: {
         create: vi.fn().mockResolvedValue({
-          choices: [{ message: { content: 'Mocked response from OpenAI' } }],
+          choices: [{ message: { content: "Mocked response from OpenAI" } }],
         }),
       },
     },
@@ -33,7 +33,15 @@ vi.mock('openai', () => {
   };
 });
 
-describe('Handler Tests', () => {
+vi.mock("../../services/get-ssm-parameters.js", () => {
+  const mockGetParam = vi.fn();
+
+  return {
+    getParamOrDefault: mockGetParam.mockResolvedValue("test"),
+  };
+});
+
+describe("Handler Tests", () => {
   let contextMock;
 
   beforeEach(() => {
@@ -45,44 +53,48 @@ describe('Handler Tests', () => {
     vi.clearAllMocks();
   });
 
-  it('should use ReadNewsStrategy for readNewsIntent', async () => {
+  it("should use ReadNewsStrategy for readNewsIntent", async () => {
     const event = {
       request: {
-        type: 'IntentRequest',
+        type: "IntentRequest",
         intent: {
-          name: 'ReadNewsIntent',
+          name: "ReadNewsIntent",
         },
       },
     };
 
     await handler(event);
 
-    expect(contextMock.setStrategy).toHaveBeenCalledWith(expect.any(ReadNewsStrategy));
+    expect(contextMock.setStrategy).toHaveBeenCalledWith(
+      expect.any(ReadNewsStrategy),
+    );
   });
 
-  it('should use StopStrategy for stopIntent', async () => {
+  it("should use StopStrategy for stopIntent", async () => {
     const event = {
       request: {
-        type: 'IntentRequest',
+        type: "IntentRequest",
         intent: {
-          name: 'AMAZON.StopIntent',
+          name: "AMAZON.StopIntent",
         },
       },
     };
 
     await handler(event);
 
-    expect(contextMock.setStrategy).toHaveBeenCalledWith(expect.any(StopStrategy));
+    expect(contextMock.setStrategy).toHaveBeenCalledWith(
+      expect.any(StopStrategy),
+    );
   });
 
-  it('should use ChatStrategy for chatIntent', async () => {
+  it("should use ChatStrategy for chatIntent", async () => {
     const event = {
       request: {
-        type: 'IntentRequest',
+        type: "IntentRequest",
         intent: {
-          name: 'ChatGPTIntent',
+          name: "ChatGPTIntent",
           slots: {
-            query: { value: 'Hello' },
+            query: { value: "Hello" },
           },
         },
       },
@@ -90,20 +102,22 @@ describe('Handler Tests', () => {
 
     await handler(event);
 
-    expect(contextMock.setStrategy).toHaveBeenCalledWith(expect.any(ChatStrategy));
+    expect(contextMock.setStrategy).toHaveBeenCalledWith(
+      expect.any(ChatStrategy),
+    );
   });
 
-  it('should use TranspoPathStrategy for transpoPathIntent', async () => {
+  it("should use TranspoPathStrategy for transpoPathIntent", async () => {
     const event = {
       request: {
-        type: 'IntentRequest',
+        type: "IntentRequest",
         intent: {
-          name: 'TranspoPathIntent',
+          name: "TranspoPathIntent",
           slots: {
-            from: { value: 'Location A' },
-            to: { value: 'Location B' },
-            date: { value: '2025-05-18' },
-            time: { value: '10:00' },
+            from: { value: "Location A" },
+            to: { value: "Location B" },
+            date: { value: "2025-05-18" },
+            time: { value: "10:00" },
           },
         },
       },
@@ -111,20 +125,22 @@ describe('Handler Tests', () => {
 
     await handler(event);
 
-    expect(contextMock.setStrategy).toHaveBeenCalledWith(expect.any(TranspoPathStrategy));
+    expect(contextMock.setStrategy).toHaveBeenCalledWith(
+      expect.any(TranspoPathStrategy),
+    );
   });
 
-  it('should use FlightFinderStrategy for flightFinderIntent', async () => {
+  it("should use FlightFinderStrategy for flightFinderIntent", async () => {
     const event = {
       request: {
-        type: 'IntentRequest',
+        type: "IntentRequest",
         intent: {
-          name: 'FlightFinderIntent',
+          name: "FlightFinderIntent",
           slots: {
-            origin: { value: 'City A' },
-            destination: { value: 'City B' },
-            departureDate: { value: '2025-05-20' },
-            returnDate: { value: '2025-05-25' },
+            origin: { value: "City A" },
+            destination: { value: "City B" },
+            departureDate: { value: "2025-05-20" },
+            returnDate: { value: "2025-05-25" },
             test: { value: "true" },
           },
         },
@@ -133,48 +149,54 @@ describe('Handler Tests', () => {
 
     await handler(event);
 
-    expect(contextMock.setStrategy).toHaveBeenCalledWith(expect.any(FlightFinderStrategy));
+    expect(contextMock.setStrategy).toHaveBeenCalledWith(
+      expect.any(FlightFinderStrategy),
+    );
   });
 
-  it('should use FallbackStrategy for unknown intent', async () => {
+  it("should use FallbackStrategy for unknown intent", async () => {
     const event = {
       request: {
-        type: 'IntentRequest',
+        type: "IntentRequest",
         intent: {
-          name: 'UnknownIntent',
+          name: "UnknownIntent",
         },
       },
     };
 
     await handler(event);
 
-    expect(contextMock.setStrategy).toHaveBeenCalledWith(expect.any(FallbackStrategy));
+    expect(contextMock.setStrategy).toHaveBeenCalledWith(
+      expect.any(FallbackStrategy),
+    );
   });
 
-  it('should use FallbackStrategy for non-intent request', async () => {
+  it("should use FallbackStrategy for non-intent request", async () => {
     const event = {
       request: {
-        type: 'LaunchRequest',
+        type: "LaunchRequest",
       },
     };
 
     await handler(event);
 
-    expect(contextMock.setStrategy).toHaveBeenCalledWith(expect.any(FallbackStrategy));
+    expect(contextMock.setStrategy).toHaveBeenCalledWith(
+      expect.any(FallbackStrategy),
+    );
   });
 
-  it('should handle errors gracefully', async () => {
+  it("should handle errors gracefully", async () => {
     const event = {
       request: {
-        type: 'IntentRequest',
+        type: "IntentRequest",
         intent: {
-          name: 'readNewsIntent',
+          name: "readNewsIntent",
         },
       },
     };
 
     contextMock.executeStrategy.mockImplementationOnce(() => {
-      throw new Error('Test error');
+      throw new Error("Test error");
     });
 
     const response = await handler(event);

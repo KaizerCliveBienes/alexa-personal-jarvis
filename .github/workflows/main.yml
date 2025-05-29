@@ -21,8 +21,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Or your desired Node.js version (e.g., 18, 20)
-          cache: 'yarn' # Caches Yarn dependencies to speed up builds
+          node-version: "20" # Or your desired Node.js version (e.g., 18, 20)
+          cache: "yarn" # Caches Yarn dependencies to speed up builds
 
       - name: Install dependencies
         run: yarn install --immutable # Use yarn install --immutable for clean and locked installs in CI
@@ -45,8 +45,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Must match the version used in build_and_test
-          cache: 'yarn'
+          node-version: "20" # Must match the version used in build_and_test
+          cache: "yarn"
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
