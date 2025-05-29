@@ -10,7 +10,7 @@
       "confirmationStatus": "NONE",
       "slots": {
         "test": {
-          "value": "true"
+          "value": "false"
         }
       }
     },

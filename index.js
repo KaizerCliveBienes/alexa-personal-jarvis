@@ -48,10 +48,20 @@ const s3Client = new AWS.S3({
 const s3BucketName = process.env.S3_BUCKET_NAME;
 
 export const handler = async (event, _) => {
+  const storeAudioFileTemp = new StoreAudioFileTemp(s3Client, s3BucketName);
   const context = new Context();
   let parameters = {};
 
-  const storeAudioFileTemp = new StoreAudioFileTemp(s3Client, s3BucketName);
+  if (event?.action === "construct-read-news") {
+    context.setStrategy(new ReadNewsStrategy(genai, storeAudioFileTemp));
+    parameters = {
+      ...parameters,
+      test: (event?.test ?? "false") === "true",
+      action: event?.action,
+    };
+
+    return await context.executeStrategy(parameters);
+  }
 
   try {
     if (event.request.type !== config.alexa.event.intentRequest) {
@@ -62,7 +72,8 @@ export const handler = async (event, _) => {
           parameters = {
             ...parameters,
             test:
-              event.request?.intent?.slots?.test?.value ?? "false" === "true",
+              (event.request?.intent?.slots?.test?.value ?? "false") === "true",
+            action: "fetch-latest-news",
           };
 
           context.setStrategy(new ReadNewsStrategy(genai, storeAudioFileTemp));

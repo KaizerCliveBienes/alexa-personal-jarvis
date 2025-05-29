@@ -9,10 +9,20 @@ class ReadNewsStrategy extends Strategy {
   }
 
   async execute(parameters) {
+    if (parameters.action === "fetch-latest-news") {
+      const { url, key } = parameters.test
+        ? { url: "https://example.com", key: "test-file.mp3" }
+        : await this.storeAudioFileTemp.getLatestAudioTemporaryUrl();
+
+      console.info("fetch latest news. url: ", url, "key:", key);
+
+      return this.formatResponse(url);
+    }
+
     const content = await fetchLatestNews(this.genai);
 
     if (parameters.test) {
-      console.info(`Read news intent content: ${content}`);
+      console.info(`Test Read news intent content: ${content}`);
       return this.formatTextResponse(content);
     }
 

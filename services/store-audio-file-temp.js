@@ -1,3 +1,5 @@
+import { ListObjectsV2Command } from "@aws-sdk/client-s3";
+
 class StoreAudioFileTemp {
   constructor(s3Client, bucketName) {
     this.s3Client = s3Client;
@@ -33,6 +35,50 @@ class StoreAudioFileTemp {
       return { url: temporaryUrl, key: s3Key };
     } catch (error) {
       console.error("Error uploading to S3:", error);
+      throw error;
+    }
+  }
+
+  async getLatestAudioTemporaryUrl() {
+    try {
+      console.log(
+        "Attempting to find the latest file in S3 bucket:",
+        this.bucketName,
+      );
+
+      const listObjectsParams = {
+        Bucket: this.bucketName,
+      };
+
+      const data = await this.s3Client
+        .listObjectsV2(listObjectsParams)
+        .promise();
+
+      if (!data.Contents || data.Contents.length === 0) {
+        throw new Error("No objects found in the bucket.");
+      }
+
+      const sortedObjects = data.Contents.sort(
+        (a, b) => b.LastModified.getTime() - a.LastModified.getTime(),
+      );
+
+      const latestObject = sortedObjects[0];
+
+      const signedUrlParams = {
+        Bucket: this.bucketName,
+        Key: latestObject.Key,
+        Expires: this.expirationSeconds,
+      };
+
+      const temporaryUrl = this.s3Client.getSignedUrl(
+        "getObject",
+        signedUrlParams,
+      );
+      console.info("Temporary S3 URL:", temporaryUrl);
+
+      return { url: temporaryUrl, key: latestObject.Key };
+    } catch (error) {
+      console.error("Error fetching from S3:", error);
       throw error;
     }
   }
