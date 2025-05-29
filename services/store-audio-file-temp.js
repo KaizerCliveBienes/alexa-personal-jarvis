@@ -1,5 +1,3 @@
-import { ListObjectsV2Command } from "@aws-sdk/client-s3";
-
 class StoreAudioFileTemp {
   constructor(s3Client, bucketName) {
     this.s3Client = s3Client;
