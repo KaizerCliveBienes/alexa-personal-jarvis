@@ -26,11 +26,9 @@ describe("StoreAudioFileTemp", () => {
       const mockSignedUrl =
         "https://mock-s3-url.com/temp-audio.mp3?temp-signed-url";
 
-      s3Client.upload = vi
-        .fn()
-        .mockReturnValue({
-          promise: vi.fn().mockResolvedValue(mockUploadResult),
-        });
+      s3Client.upload = vi.fn().mockReturnValue({
+        promise: vi.fn().mockResolvedValue(mockUploadResult),
+      });
       s3Client.getSignedUrl = vi.fn().mockReturnValue(mockSignedUrl);
 
       const result =
