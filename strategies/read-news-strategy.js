@@ -64,7 +64,7 @@ class ReadNewsStrategy extends Strategy {
               stream: {
                 token: "this-is-the-audio-token-" + Date.now(),
                 url: url,
-                offsetInMilliseconds: 2500,
+                offsetInMilliseconds: 0,
               },
             },
           },

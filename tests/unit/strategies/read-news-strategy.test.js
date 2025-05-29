@@ -76,7 +76,7 @@ describe("ReadNewsStrategy", () => {
               stream: {
                 token: expect.stringContaining("this-is-the-audio-token-"),
                 url: mockUrl,
-                offsetInMilliseconds: 2500,
+                offsetInMilliseconds: 0,
               },
             },
           },
