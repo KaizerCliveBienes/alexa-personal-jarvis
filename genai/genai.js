@@ -3,8 +3,7 @@ class GenAI {
     this.model = model;
   }
 
-  async chatQuery(systemInstruction, query) {
-  }
+  async chatQuery(systemInstruction, query) {}
 }
 
 export default GenAI;

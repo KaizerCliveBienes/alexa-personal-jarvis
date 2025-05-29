@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 
 Resources:
@@ -6,9 +6,9 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: AlexaChatGPTHandlerFunction
-      Handler: index.handler  # Points to index.js handler function
+      Handler: index.handler # Points to index.js handler function
       Runtime: nodejs20.x
-      CodeUri: .  # Folder containing index.js
+      CodeUri: . # Folder containing index.js
       MemorySize: 128
       Timeout: 45
       Policies:
@@ -22,10 +22,9 @@ Resources:
           S3_ACCESS_KEY_SECRET: ""
           S3_REGION: ""
           S3_BUCKET_NAME: ""
-
+          PARAMETER_STORE_PREFIX: ""
 
 Outputs:
   AlexaChatGPTHandler:
     Description: "Lambda alexa chatgpt handler name"
     Value: !Ref AlexaChatGPTHandlerFunction
-

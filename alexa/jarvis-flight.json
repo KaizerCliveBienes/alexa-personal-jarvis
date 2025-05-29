@@ -1,228 +1,225 @@
 {
-    "interactionModel": {
-        "languageModel": {
-            "invocationName": "jarvis flight",
-            "intents": [
-                {
-                    "name": "AMAZON.CancelIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.HelpIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.StopIntent",
-                    "samples": []
-                },
-                {
-                    "name": "HelloWorldIntent",
-                    "slots": [],
-                    "samples": [
-                        "hello",
-                        "how are you",
-                        "say hi world",
-                        "say hi",
-                        "hi",
-                        "say hello world",
-                        "say hello"
-                    ]
-                },
-                {
-                    "name": "AMAZON.NavigateHomeIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.FallbackIntent",
-                    "samples": []
-                },
-                {
-                    "name": "FlightFinderIntent",
-                    "slots": [
-                        {
-                            "name": "origin",
-                            "type": "AMAZON.City",
-                            "samples": [
-                                "origin city is {origin}",
-                                "from {origin}"
-                            ]
-                        },
-                        {
-                            "name": "destination",
-                            "type": "AMAZON.City",
-                            "samples": [
-                                "to {destination}",
-                                "i am going to {destination}",
-                                "i want to go to {destination}"
-                            ]
-                        },
-                        {
-                            "name": "departureDate",
-                            "type": "AMAZON.DATE",
-                            "samples": [
-                                "depart on {departureDate}",
-                                "departing from {departureDate}",
-                                "leaving on {departureDate}"
-                            ]
-                        },
-                        {
-                            "name": "returnDate",
-                            "type": "AMAZON.DATE",
-                            "samples": [
-                                "coming back {returnDate}",
-                                "returning on {returnDate}",
-                                "i am coming back on {returnDate}"
-                            ]
-                        }
-                    ],
-                    "samples": [
-                        "Find me a flight from {origin} to {destination} on {departureDate} returning {returnDate}",
-                        "I need a flight from {origin} to {destination} on {departureDate}",
-                        "Book a flight from {origin} to {destination} on {departureDate} returning {returnDate}",
-                        "Show flights from {origin} to {destination} on {departureDate}",
-                        "Find flights from {origin} to {destination} leaving on {departureDate}",
-                        "Search for flights from {origin} to {destination}",
-                        "I want to fly from {origin} to {destination} on {departureDate}",
-                        "Look for a flight from {origin} to {destination} on {departureDate}",
-                        "Get me a flight from {origin} to {destination} departing {departureDate}",
-                        "Find a round trip from {origin} to {destination} departing {departureDate} returning {returnDate}",
-                        "I need a one-way ticket from {origin} to {destination} on {departureDate}",
-                        "Check flights from {origin} to {destination}",
-                        "Find available flights from {origin} to {destination} on {departureDate}",
-                        "Search flights from {origin} to {destination} departing {departureDate} coming back {returnDate}",
-                        "Show me the cheapest flights from {origin} to {destination} on {departureDate}",
-                        "Look up flights from {origin} to {destination} on {departureDate}",
-                        "Book a round trip flight from {origin} to {destination} on {departureDate} and returning {returnDate}",
-                        "I want to book a flight from {origin} to {destination} on {departureDate}",
-                        "Tell me the best flights from {origin} to {destination} on {departureDate}",
-                        "Find flights from {origin} to {destination} leaving {departureDate} and coming back {returnDate}",
-                        "Help me find a flight from {origin} to {destination} on {departureDate}",
-                        "Get a list of flights from {origin} to {destination}",
-                        "Check availability for flights from {origin} to {destination} on {departureDate}",
-                        "I need to travel from {origin} to {destination} on {departureDate}",
-                        "Book a flight to {destination} from {origin}",
-                        "Find direct flights from {origin} to {destination} on {departureDate}",
-                        "Look up the fastest flights from {origin} to {destination} on {departureDate}",
-                        "Can you find me a flight from {origin} to {destination} on {departureDate}",
-                        "Search flights from {origin} to {destination}"
-                    ]
-                }
-            ],
-            "types": []
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "jarvis flight",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
         },
-        "dialog": {
-            "intents": [
-                {
-                    "name": "FlightFinderIntent",
-                    "confirmationRequired": false,
-                    "prompts": {},
-                    "slots": [
-                        {
-                            "name": "origin",
-                            "type": "AMAZON.City",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.605841338311.460627603350"
-                            }
-                        },
-                        {
-                            "name": "destination",
-                            "type": "AMAZON.City",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.605841338311.1413394940820"
-                            }
-                        },
-                        {
-                            "name": "departureDate",
-                            "type": "AMAZON.DATE",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.605841338311.1621224289186"
-                            }
-                        },
-                        {
-                            "name": "returnDate",
-                            "type": "AMAZON.DATE",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.605841338311.108420949980"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "delegationStrategy": "ALWAYS"
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
         },
-        "prompts": [
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "HelloWorldIntent",
+          "slots": [],
+          "samples": [
+            "hello",
+            "how are you",
+            "say hi world",
+            "say hi",
+            "hi",
+            "say hello world",
+            "say hello"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "FlightFinderIntent",
+          "slots": [
             {
-                "id": "Elicit.Slot.605841338311.460627603350",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "from which origin city?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "where are you coming from?"
-                    }
-                ]
+              "name": "origin",
+              "type": "AMAZON.City",
+              "samples": ["origin city is {origin}", "from {origin}"]
             },
             {
-                "id": "Elicit.Slot.605841338311.1413394940820",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "where do you want to go?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "what is the destination city?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "to where are you going?"
-                    }
-                ]
+              "name": "destination",
+              "type": "AMAZON.City",
+              "samples": [
+                "to {destination}",
+                "i am going to {destination}",
+                "i want to go to {destination}"
+              ]
             },
             {
-                "id": "Elicit.Slot.605841338311.1621224289186",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "when do you plan on going?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "when is the departure date?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "when are you leaving?"
-                    }
-                ]
+              "name": "departureDate",
+              "type": "AMAZON.DATE",
+              "samples": [
+                "depart on {departureDate}",
+                "departing from {departureDate}",
+                "leaving on {departureDate}"
+              ]
             },
             {
-                "id": "Elicit.Slot.605841338311.108420949980",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "when are you coming back?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "when do you return?"
-                    },
-                    {
-                        "type": "PlainText",
-                        "value": "when do you plan to come back?"
-                    }
-                ]
+              "name": "returnDate",
+              "type": "AMAZON.DATE",
+              "samples": [
+                "coming back {returnDate}",
+                "returning on {returnDate}",
+                "i am coming back on {returnDate}"
+              ]
             }
+          ],
+          "samples": [
+            "Find me a flight from {origin} to {destination} on {departureDate} returning {returnDate}",
+            "I need a flight from {origin} to {destination} on {departureDate}",
+            "Book a flight from {origin} to {destination} on {departureDate} returning {returnDate}",
+            "Show flights from {origin} to {destination} on {departureDate}",
+            "Find flights from {origin} to {destination} leaving on {departureDate}",
+            "Search for flights from {origin} to {destination}",
+            "I want to fly from {origin} to {destination} on {departureDate}",
+            "Look for a flight from {origin} to {destination} on {departureDate}",
+            "Get me a flight from {origin} to {destination} departing {departureDate}",
+            "Find a round trip from {origin} to {destination} departing {departureDate} returning {returnDate}",
+            "I need a one-way ticket from {origin} to {destination} on {departureDate}",
+            "Check flights from {origin} to {destination}",
+            "Find available flights from {origin} to {destination} on {departureDate}",
+            "Search flights from {origin} to {destination} departing {departureDate} coming back {returnDate}",
+            "Show me the cheapest flights from {origin} to {destination} on {departureDate}",
+            "Look up flights from {origin} to {destination} on {departureDate}",
+            "Book a round trip flight from {origin} to {destination} on {departureDate} and returning {returnDate}",
+            "I want to book a flight from {origin} to {destination} on {departureDate}",
+            "Tell me the best flights from {origin} to {destination} on {departureDate}",
+            "Find flights from {origin} to {destination} leaving {departureDate} and coming back {returnDate}",
+            "Help me find a flight from {origin} to {destination} on {departureDate}",
+            "Get a list of flights from {origin} to {destination}",
+            "Check availability for flights from {origin} to {destination} on {departureDate}",
+            "I need to travel from {origin} to {destination} on {departureDate}",
+            "Book a flight to {destination} from {origin}",
+            "Find direct flights from {origin} to {destination} on {departureDate}",
+            "Look up the fastest flights from {origin} to {destination} on {departureDate}",
+            "Can you find me a flight from {origin} to {destination} on {departureDate}",
+            "Search flights from {origin} to {destination}"
+          ]
+        }
+      ],
+      "types": []
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "FlightFinderIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "origin",
+              "type": "AMAZON.City",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.605841338311.460627603350"
+              }
+            },
+            {
+              "name": "destination",
+              "type": "AMAZON.City",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.605841338311.1413394940820"
+              }
+            },
+            {
+              "name": "departureDate",
+              "type": "AMAZON.DATE",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.605841338311.1621224289186"
+              }
+            },
+            {
+              "name": "returnDate",
+              "type": "AMAZON.DATE",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.605841338311.108420949980"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.605841338311.460627603350",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "from which origin city?"
+          },
+          {
+            "type": "PlainText",
+            "value": "where are you coming from?"
+          }
         ]
-    }
+      },
+      {
+        "id": "Elicit.Slot.605841338311.1413394940820",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "where do you want to go?"
+          },
+          {
+            "type": "PlainText",
+            "value": "what is the destination city?"
+          },
+          {
+            "type": "PlainText",
+            "value": "to where are you going?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.605841338311.1621224289186",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "when do you plan on going?"
+          },
+          {
+            "type": "PlainText",
+            "value": "when is the departure date?"
+          },
+          {
+            "type": "PlainText",
+            "value": "when are you leaving?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.605841338311.108420949980",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "when are you coming back?"
+          },
+          {
+            "type": "PlainText",
+            "value": "when do you return?"
+          },
+          {
+            "type": "PlainText",
+            "value": "when do you plan to come back?"
+          }
+        ]
+      }
+    ]
+  }
 }
